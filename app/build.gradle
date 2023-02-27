@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.android2023"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -23,6 +23,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    //Не работает, в buildConfig не отображается( todo
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(rootProject.file("keys.properties")))
+    buildTypes.each {
+        it.buildConfigField 'String', 'API_BASE_URL', keystoreProperties['baseUrl']
+        it.buildConfigField 'String', 'API_KEY', keystoreProperties['apiKey']
+    }
+    //
+
     buildFeatures {
         viewBinding true
     }

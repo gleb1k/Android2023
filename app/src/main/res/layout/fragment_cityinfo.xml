@@ -8,28 +8,100 @@
         android:id="@+id/tv_city_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Город"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Город"
+        android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/ic_baseline_wb_sunny_24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_temp"
         app:layout_constraintTop_toBottomOf="@+id/tv_city_name" />
+
     <TextView
-        android:id="@+id/tv_desc"
+        android:id="@+id/tv_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Детальная инфа"
-        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
+        android:text="10"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_icon"
+        app:layout_constraintEnd_toStartOf="@+id/iv_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/iv_icon" />
+
+    <TextView
+        android:id="@+id/tv_temp_feels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ощущается"
+        app:layout_constraintEnd_toEndOf="@+id/tv_temp"
+        app:layout_constraintStart_toStartOf="@+id/tv_temp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_temp" />
+
+    <TextView
+        android:id="@+id/tv_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Ветер"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+    <TextView
+        android:id="@+id/tv_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Влажность"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wind"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tv_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Давление"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_humidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tv_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Облачность"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pressure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <TextView
+        android:id="@+id/tv_sun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Восход - Закат"
+        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_cloud"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

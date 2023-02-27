@@ -1,7 +1,7 @@
 package com.example.android2023.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android2023.R
 import com.example.android2023.databinding.ActivityMainBinding
 
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
             )
             .commit()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
