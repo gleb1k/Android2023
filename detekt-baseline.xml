@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <SmellBaseline>
   <ManuallySuppressedIssues/>
-  <CurrentIssues/>
+  <CurrentIssues>
+    <ID>EmptyClassBlock:CityAdapter.kt$CityAdapter${ }</ID>
+    <ID>EmptyClassBlock:CityHolder.kt$CityHolder${ }</ID>
+    <ID>NotImplementedDeclaration:MetricInterceptor.kt$MetricInterceptor$TODO("Not yet implemented")</ID>
+    <ID>SpacingBetweenPackageAndImports:Clouds.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:Coord.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:DataContainer.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:Main.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:Sys.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:Weather.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:WeatherResponse.kt$ </ID>
+    <ID>SpacingBetweenPackageAndImports:Wind.kt$ </ID>
+    <ID>UnusedImports:ApiKeyInterceptor.kt$import com.example.android2023.BuildConfig</ID>
+    <ID>UnusedImports:MainFragment.kt$import android.util.Log</ID>
+  </CurrentIssues>
 </SmellBaseline>
