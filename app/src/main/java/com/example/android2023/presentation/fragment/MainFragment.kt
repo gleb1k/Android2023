@@ -24,7 +24,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
-        //viewModel.loadCities()
+        viewModel.loadCities()
 
         adapter = CityAdapter(onItemClick = ::navigateToCityInfoFragment).also {
             viewModel.citiesList.observe(viewLifecycleOwner) { list ->
@@ -56,15 +56,16 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     try {
                         viewModel.weatherResponse.observe(viewLifecycleOwner) {
+                            //todo из-за того что данные долго подгружаются навигация происходит
+//                                //по старому айдишнику weatherResponse
+//                                //т.е нужно как-то подождать ответа, КАК?
+//                                //попаболь с навигацией
                             viewModel.onSearchClick(query ?: "")
                             if (it == null) return@observe
                             navigateToCityInfoFragment(it.id)
 
 //                            it.fold(onSuccess = { wr ->
-//                                //todo из-за того что данные долго подгружаются навигация происходит
-//                                //по старому айдишнику weatherResponse
-//                                //т.е нужно как-то подождать ответа, КАК?
-//                                //попаболь с навигацией
+//
 //                                navigateToCityInfoFragment(wr.id)
 //                                //не понял как это работает
 ////                            viewModel.navigateToDetails.observe(viewLifecycleOwner) { _ ->
