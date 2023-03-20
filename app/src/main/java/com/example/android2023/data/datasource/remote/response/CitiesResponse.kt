@@ -1,6 +1,5 @@
-package com.example.android2023.data.response.citiesResponse
+package com.example.android2023.data.datasource.remote.response
 
-import com.example.android2023.data.response.weatherResponse.WeatherResponse
 import com.google.gson.annotations.SerializedName
 
 data class CitiesResponse(
