@@ -1,11 +1,13 @@
 package com.example.android2023.ui.recyclerView
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.android2023.databinding.ItemCityBinding
 import com.example.android2023.ui.recyclerView.models.CityItem
+import timber.log.Timber
 
 class CityHolder(
     private val binding: ItemCityBinding,
@@ -21,9 +23,11 @@ class CityHolder(
             ivIcon.load(city.url)
 
 
-            //КАК СДЕЛАТЬ ВЕСЬ ITEM КЛИКАБЕЛЬНЫМ? не работает(
-            itemView.setOnClickListener {
+            //КАК СДЕЛАТЬ ВЕСЬ ITEM КЛИКАБЕЛЬНЫМ? работает через раз
+            root.setOnClickListener {
                 onItemClick(city.id)
+                Timber.log(1,"click")
+                Log.e("ddd","click")
             }
             //костыль
             tvTemp.setOnClickListener {
@@ -38,7 +42,6 @@ class CityHolder(
         }
     }
 
-    //todo
     companion object {
         fun create(
             parent: ViewGroup,
