@@ -70,7 +70,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 //                                //не понял как это работает
 ////                            viewModel.navigateToDetails.observe(viewLifecycleOwner) { _ ->
 ////                                viewModel.userClicksOnButton()
-////                            }
+//                            }
 //                            },
 //                                onFailure = { throwable ->
 //                                    Timber.d(throwable)
