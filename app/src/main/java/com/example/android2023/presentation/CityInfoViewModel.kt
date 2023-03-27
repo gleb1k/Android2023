@@ -4,7 +4,6 @@ import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
-import com.example.android2023.di.DataContainer
 import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
 import kotlinx.coroutines.launch
 import java.util.*
@@ -54,9 +53,9 @@ class CityInfoViewModel(
     }
 
     companion object {
-       fun provideFactory(
-           getWeatherByIdUseCase: GetWeatherByIdUseCase
-       ) : ViewModelProvider.Factory = viewModelFactory {
+        fun provideFactory(
+            getWeatherByIdUseCase: GetWeatherByIdUseCase
+        ): ViewModelProvider.Factory = viewModelFactory {
             initializer {
                 CityInfoViewModel(
                     getWeatherByIdUseCase

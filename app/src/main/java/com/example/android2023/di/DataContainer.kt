@@ -1,21 +1,7 @@
 package com.example.android2023.di
 
 
-import com.example.android2023.data.Constants
-import com.example.android2023.data.WeatherRepositoryImpl
-import com.example.android2023.data.datasource.remote.WeatherApi
-import com.example.android2023.data.interceptor.ApiKeyInterceptor
-import com.example.android2023.data.interceptor.LanguageInterceptor
-import com.example.android2023.data.interceptor.MetricInterceptor
-import com.example.android2023.domain.usecase.GetNearCitiesUseCase
-import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
-import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-//
-//object DataContainer {
+object DataContainer {
 //
 //    private val httpClient by lazy {
 //        OkHttpClient.Builder()
@@ -46,5 +32,5 @@ import retrofit2.converter.gson.GsonConverterFactory
 //    val getNearCitiesUseCase: GetNearCitiesUseCase
 //        get() = GetNearCitiesUseCase(weatherRepository)
 //
-//
-//}
+
+}

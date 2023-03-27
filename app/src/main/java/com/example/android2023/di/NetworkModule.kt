@@ -1,12 +1,10 @@
 package com.example.android2023.di
 
 import com.example.android2023.data.Constants
-import com.example.android2023.data.WeatherRepositoryImpl
 import com.example.android2023.data.datasource.remote.WeatherApi
 import com.example.android2023.data.interceptor.ApiKeyInterceptor
 import com.example.android2023.data.interceptor.LanguageInterceptor
 import com.example.android2023.data.interceptor.MetricInterceptor
-import com.example.android2023.domain.WeatherRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor

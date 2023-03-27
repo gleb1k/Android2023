@@ -6,17 +6,14 @@ import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.android2023.App
 import com.example.android2023.R
 import com.example.android2023.databinding.FragmentMainBinding
 import com.example.android2023.domain.usecase.GetNearCitiesUseCase
-import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
 import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
 import com.example.android2023.presentation.MainViewModel
 import com.example.android2023.presentation.recyclerview.CityAdapter
 import com.example.android2023.utils.showSnackbar
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -33,7 +30,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val viewModel: MainViewModel by viewModels {
         MainViewModel.provideFactory(
             getNearCitiesUseCase,
-            getWeatherByNameUseCase)
+            getWeatherByNameUseCase
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
