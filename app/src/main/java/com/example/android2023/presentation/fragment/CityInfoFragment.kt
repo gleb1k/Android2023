@@ -5,9 +5,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
+import com.example.android2023.App
 import com.example.android2023.R
 import com.example.android2023.databinding.FragmentCityinfoBinding
+import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
 import com.example.android2023.presentation.CityInfoViewModel
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class CityInfoFragment : Fragment(R.layout.fragment_cityinfo) {
@@ -15,8 +18,19 @@ class CityInfoFragment : Fragment(R.layout.fragment_cityinfo) {
     private var binding: FragmentCityinfoBinding? = null
     private var cityId: Int = 0
 
+    @Inject
+    lateinit var getWeatherByIdUseCase: GetWeatherByIdUseCase
+
     private val viewModel: CityInfoViewModel by viewModels {
-        CityInfoViewModel.Factory
+        CityInfoViewModel.provideFactory(
+            getWeatherByIdUseCase
+        )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
+        App.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

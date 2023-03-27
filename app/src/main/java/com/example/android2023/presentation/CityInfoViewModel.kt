@@ -54,9 +54,10 @@ class CityInfoViewModel(
     }
 
     companion object {
-        val Factory : ViewModelProvider.Factory = viewModelFactory {
+       fun provideFactory(
+           getWeatherByIdUseCase: GetWeatherByIdUseCase
+       ) : ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val getWeatherByIdUseCase = DataContainer.getWeatherByIdUseCase
                 CityInfoViewModel(
                     getWeatherByIdUseCase
                 )

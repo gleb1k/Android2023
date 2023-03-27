@@ -15,7 +15,7 @@ class MainViewModel(
     private val getNearCitiesUseCase: GetNearCitiesUseCase,
     private val getWeatherByNameUseCase: GetWeatherByNameUseCase
 ) : ViewModel() {
-    //todo костыль.  как делать ??????
+    //todo костыль.  как делать правильную навигацию ??????
 //    val navigateToDetails = SingleLiveEvent<Any>()
 //    fun userClicksOnButton() {
 //        navigateToDetails.call()
@@ -76,10 +76,12 @@ class MainViewModel(
     }
 
     companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
+        //Костыль чтобы заинджектить вьюмодельку
+        fun provideFactory(
+            getNearCitiesUseCase : GetNearCitiesUseCase,
+            getWeatherByNameUseCase : GetWeatherByNameUseCase
+        ): ViewModelProvider.Factory = viewModelFactory {
             initializer {
-                val getNearCitiesUseCase = DataContainer.getNearCitiesUseCase
-                val getWeatherByNameUseCase = DataContainer.getWeatherByNameUseCase
                 MainViewModel(
                     getNearCitiesUseCase,
                     getWeatherByNameUseCase

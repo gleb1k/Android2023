@@ -6,19 +6,40 @@ import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.android2023.App
 import com.example.android2023.R
 import com.example.android2023.databinding.FragmentMainBinding
+import com.example.android2023.domain.usecase.GetNearCitiesUseCase
+import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
+import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
 import com.example.android2023.presentation.MainViewModel
 import com.example.android2023.presentation.recyclerview.CityAdapter
 import com.example.android2023.utils.showSnackbar
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private var binding: FragmentMainBinding? = null
     private var adapter: CityAdapter? = null
 
+    @Inject
+    lateinit var getWeatherByNameUseCase: GetWeatherByNameUseCase
+
+    @Inject
+    lateinit var getNearCitiesUseCase: GetNearCitiesUseCase
+
     private val viewModel: MainViewModel by viewModels {
-        MainViewModel.Factory
+        MainViewModel.provideFactory(
+            getNearCitiesUseCase,
+            getWeatherByNameUseCase)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
+        App.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,9 +67,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             .commit()
     }
 
-    //ВОТ ЧТО БЫВАЕТ КОГДА ПЫТАЕШЬСЯ ДЕБАЖИТЬ АПИШКУ
-    //Your account is temporary blocked due to exceeding of requests limitation of your subscription type. Please choose the proper subscription https://openweathermap.org/price
-    //СПАСИБО ЗА БАН
     private fun setCitySearchView() {
         binding?.run {
             sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -57,26 +75,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     try {
                         viewModel.weatherResponse.observe(viewLifecycleOwner) {
                             //todo из-за того что данные долго подгружаются навигация происходит
-//                                //по старому айдишнику weatherResponse
-//                                //т.е нужно как-то подождать ответа, КАК?
-//                                //попаболь с навигацией
+                            //по старому айдишнику weatherResponse
+                            //т.е нужно как-то подождать ответа, КАК?
+                            //попаболь с навигацией
                             viewModel.onSearchClick(query ?: "")
                             if (it == null) return@observe
                             navigateToCityInfoFragment(it.id)
-
-//                            it.fold(onSuccess = { wr ->
-//
-//                                navigateToCityInfoFragment(wr.id)
-//                                //не понял как это работает
-////                            viewModel.navigateToDetails.observe(viewLifecycleOwner) { _ ->
-////                                viewModel.userClicksOnButton()
-//                            }
-//                            },
-//                                onFailure = { throwable ->
-//                                    Timber.d(throwable)
-//                                    activity!!.findViewById<View>(android.R.id.content)
-//                                        .showSnackbar("Город $query не найден")
-//                                })
                         }
 
                     } catch (ex: Exception) {
