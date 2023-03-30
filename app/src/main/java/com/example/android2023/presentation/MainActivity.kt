@@ -1,9 +1,10 @@
-package com.example.android2023.ui
+package com.example.android2023.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android2023.R
 import com.example.android2023.databinding.ActivityMainBinding
+import com.example.android2023.presentation.fragment.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

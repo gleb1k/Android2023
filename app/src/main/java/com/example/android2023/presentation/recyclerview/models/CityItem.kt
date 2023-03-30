@@ -1,4 +1,4 @@
-package com.example.android2023.ui.recyclerView.models
+package com.example.android2023.presentation.recyclerview.models
 
 import com.example.android2023.R
 
