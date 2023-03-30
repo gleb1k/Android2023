@@ -1,6 +1,5 @@
 package com.example.android2023.data.interceptor
 
-import com.example.android2023.BuildConfig
 import com.example.android2023.data.Constants
 import okhttp3.Interceptor
 import okhttp3.Response

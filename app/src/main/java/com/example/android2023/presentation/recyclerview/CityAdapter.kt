@@ -1,9 +1,9 @@
-package com.example.android2023.ui.recyclerView
+package com.example.android2023.presentation.recyclerview
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.android2023.ui.recyclerView.models.CityItem
+import com.example.android2023.presentation.recyclerview.models.CityItem
 
 class CityAdapter(
     private val onItemClick: (Int) -> Unit,
