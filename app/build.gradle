@@ -64,6 +64,7 @@ dependencies {
     def retrofit = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
 
     def okhttp = '4.10.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttp"
@@ -77,6 +78,13 @@ dependencies {
     def dagger = '2.45'
     implementation "com.google.dagger:dagger:${dagger}"
     kapt "com.google.dagger:dagger-compiler:${dagger}"
+    // endregion
+
+    // region rx
+    implementation "io.reactivex.rxjava3:rxjava:3.1.6"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
+    // endregion
 
     // region Utils
     implementation 'com.jakewharton.timber:timber:5.0.1'

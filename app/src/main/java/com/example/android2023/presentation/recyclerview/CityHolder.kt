@@ -25,8 +25,8 @@ class CityHolder(
             //КАК СДЕЛАТЬ ВЕСЬ ITEM КЛИКАБЕЛЬНЫМ? работает через раз
             root.setOnClickListener {
                 onItemClick(city.id)
-                Timber.log(1,"click")
-                Log.e("ddd","click")
+                Timber.log(1, "click")
+                Log.e("ddd", "click")
             }
             //костыль
             tvTemp.setOnClickListener {

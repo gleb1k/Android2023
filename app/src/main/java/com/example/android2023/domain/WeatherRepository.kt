@@ -2,17 +2,18 @@ package com.example.android2023.domain
 
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.presentation.recyclerview.models.CityItem
+import io.reactivex.rxjava3.core.Single
 
 interface WeatherRepository {
 
-    suspend fun getWeatherById(id: Int) : WeatherResponse
+    fun getWeatherById(id: Int): Single<WeatherResponse>
 
-    suspend fun getWeatherByName(q: String): WeatherResponse
+    fun getWeatherByName(q: String): Single<WeatherResponse>
 
-    suspend fun getNearCities(
+    fun getNearCities(
         latitude: Double,
         longitude: Double,
         count: Int
-    ): List<CityItem>
+    ): Single<List<CityItem>>
 
 }

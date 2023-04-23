@@ -2,13 +2,15 @@ package com.example.android2023.domain.usecase
 
 import com.example.android2023.domain.WeatherRepository
 import com.example.android2023.presentation.recyclerview.models.CityItem
+import io.reactivex.rxjava3.core.Single
 
 class GetNearCitiesUseCase(
     private val weatherRepository: WeatherRepository
 ) {
-    suspend operator fun invoke(
+    operator fun invoke(
         latitude: Double,
         longitude: Double,
         count: Int
-    ): List<CityItem> = weatherRepository.getNearCities(latitude, longitude, count)
+    ): Single<List<CityItem>> =
+        weatherRepository.getNearCities(latitude, longitude, count)
 }

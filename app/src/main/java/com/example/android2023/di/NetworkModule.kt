@@ -10,6 +10,7 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
@@ -46,6 +47,7 @@ class NetworkModule {
     ): Retrofit = Retrofit.Builder()
         .client(httpClient)
         .addConverterFactory(gsonConverterFactory)
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         .baseUrl(Constants.BASE_URL)
         .build()
 
