@@ -59,18 +59,4 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    companion object {
-        //Костыль чтобы заинджектить вьюмодельку
-        fun provideFactory(
-            getNearCitiesUseCase: GetNearCitiesUseCase,
-            getWeatherByNameUseCase: GetWeatherByNameUseCase
-        ): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                MainViewModel(
-                    getNearCitiesUseCase,
-                    getWeatherByNameUseCase
-                )
-            }
-        }
-    }
 }

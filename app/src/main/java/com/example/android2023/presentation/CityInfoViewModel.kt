@@ -55,17 +55,4 @@ class CityInfoViewModel @Inject constructor(
         }
     }
 
-    companion object {
-        fun provideFactory(
-            getWeatherByIdUseCase: GetWeatherByIdUseCase
-        ): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                CityInfoViewModel(
-                    getWeatherByIdUseCase
-                )
-            }
-        }
-
-    }
-
 }
