@@ -12,9 +12,11 @@ plugins {
     id 'com.android.library' version '7.2.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 
-
-    //detekt
+    // detekt
     id "io.gitlab.arturbosch.detekt" version "1.22.0"
+
+    // hilt
+    id 'com.google.dagger.hilt.android' version '2.44' apply false
 }
 
 task clean(type: Delete) {

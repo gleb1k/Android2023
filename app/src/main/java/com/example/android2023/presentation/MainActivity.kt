@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.android2023.R
 import com.example.android2023.databinding.ActivityMainBinding
 import com.example.android2023.presentation.fragment.MainFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null

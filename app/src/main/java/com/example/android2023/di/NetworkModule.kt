@@ -7,6 +7,8 @@ import com.example.android2023.data.interceptor.LanguageInterceptor
 import com.example.android2023.data.interceptor.MetricInterceptor
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class NetworkModule {
 
     @Provides

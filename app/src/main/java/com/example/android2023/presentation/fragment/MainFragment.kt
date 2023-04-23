@@ -34,12 +34,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
-        App.appComponent.inject(this)
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)

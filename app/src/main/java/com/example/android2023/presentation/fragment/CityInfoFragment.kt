@@ -27,12 +27,6 @@ class CityInfoFragment : Fragment(R.layout.fragment_cityinfo) {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
-        App.appComponent.inject(this)
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCityinfoBinding.bind(view)

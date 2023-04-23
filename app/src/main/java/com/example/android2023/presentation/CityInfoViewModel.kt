@@ -5,11 +5,14 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class CityInfoViewModel(
+@HiltViewModel
+class CityInfoViewModel @Inject constructor(
     private val getWeatherByIdUseCase: GetWeatherByIdUseCase
 ) : ViewModel() {
 
