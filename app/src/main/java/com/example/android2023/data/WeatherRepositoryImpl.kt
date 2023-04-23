@@ -4,9 +4,10 @@ import com.example.android2023.data.datasource.remote.WeatherApi
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.domain.WeatherRepository
 import com.example.android2023.presentation.recyclerview.models.CityItem
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
-class WeatherRepositoryImpl(
+class WeatherRepositoryImpl @Inject constructor(
     private val api: WeatherApi
 ) : WeatherRepository {
     override suspend fun getWeatherById(id: Int): WeatherResponse = api.getWeatherById(id)

@@ -14,31 +14,16 @@ import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
 import com.example.android2023.presentation.MainViewModel
 import com.example.android2023.presentation.recyclerview.CityAdapter
 import com.example.android2023.utils.showSnackbar
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private var binding: FragmentMainBinding? = null
     private var adapter: CityAdapter? = null
 
-    @Inject
-    lateinit var getWeatherByNameUseCase: GetWeatherByNameUseCase
-
-    @Inject
-    lateinit var getNearCitiesUseCase: GetNearCitiesUseCase
-
-    private val viewModel: MainViewModel by viewModels {
-        MainViewModel.provideFactory(
-            getNearCitiesUseCase,
-            getWeatherByNameUseCase
-        )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
-        App.appComponent.inject(this)
-        super.onCreate(savedInstanceState)
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

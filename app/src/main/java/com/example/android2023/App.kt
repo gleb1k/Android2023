@@ -2,8 +2,10 @@ package com.example.android2023
 
 import android.app.Application
 import com.example.android2023.di.*
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
@@ -13,13 +15,6 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        appComponent =  DaggerAppComponent.builder()
-            .context(applicationContext)
-            .build()
     }
 
-    companion object {
-
-        lateinit var appComponent: AppComponent
-    }
 }

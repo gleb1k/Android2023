@@ -8,9 +8,12 @@ import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.domain.usecase.GetNearCitiesUseCase
 import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
 import com.example.android2023.presentation.recyclerview.models.CityItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val getNearCitiesUseCase: GetNearCitiesUseCase,
     private val getWeatherByNameUseCase: GetWeatherByNameUseCase
 ) : ViewModel() {
@@ -19,10 +22,6 @@ class MainViewModel(
 //    fun userClicksOnButton() {
 //        navigateToDetails.call()
 //    }
-
-//    private val _weatherResponseResult = MutableLiveData<Result<WeatherResponse>>(null)
-//    val weatherResponseResult: LiveData<Result<WeatherResponse>>
-//        get() = _weatherResponseResult
 
     private val _weatherResponse = MutableLiveData<WeatherResponse?>(null)
     val weatherResponse: LiveData<WeatherResponse?>
@@ -48,20 +47,6 @@ class MainViewModel(
         }
     }
 
-
-//    private fun loadWeatherResult(cityName: String) {
-//        viewModelScope.launch {
-//            try {
-//                getWeatherByNameUseCase(cityName).also {
-//                    _weatherResponse.value = Result.success(it)
-//                }
-//            } catch (ex: Throwable) {
-//                _weatherResponse.value = Result.failure(ex)
-//                _error.value = ex
-//            }
-//        }
-//    }
-
     fun loadCities(
         latitude: Double = Constants.KAZAN_LATITUDE,
         longitude: Double = Constants.KAZAN_LONGITUDE,
@@ -74,18 +59,4 @@ class MainViewModel(
         }
     }
 
-    companion object {
-        //Костыль чтобы заинджектить вьюмодельку
-        fun provideFactory(
-            getNearCitiesUseCase: GetNearCitiesUseCase,
-            getWeatherByNameUseCase: GetWeatherByNameUseCase
-        ): ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                MainViewModel(
-                    getNearCitiesUseCase,
-                    getWeatherByNameUseCase
-                )
-            }
-        }
-    }
 }
