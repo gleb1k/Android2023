@@ -3,7 +3,8 @@ package com.example.android2023.presentation.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.SearchView
+import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android2023.App
@@ -13,7 +14,12 @@ import com.example.android2023.domain.usecase.GetNearCitiesUseCase
 import com.example.android2023.domain.usecase.GetWeatherByNameUseCase
 import com.example.android2023.presentation.MainViewModel
 import com.example.android2023.presentation.recyclerview.CityAdapter
-import com.example.android2023.utils.showSnackbar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.Flowables
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -34,6 +40,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
     }
 
+    private var searchDisposable: Disposable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //ВЫЗОВ INJECT ВСЕГДА ДО SUPER
         App.appComponent.inject(this)
@@ -51,7 +59,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
             binding?.rvCity?.adapter = it
         }
-        setCitySearchView()
+        setCityEditText()
     }
 
     private fun navigateToCityInfoFragment(id: Int) {
@@ -65,40 +73,37 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             .commit()
     }
 
-    private fun setCitySearchView() {
+    private fun setCityEditText() {
         binding?.run {
-            sv.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
-                androidx.appcompat.widget.SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    try {
-                        viewModel.weatherResponse.observe(viewLifecycleOwner) {
-                            //todo из-за того что данные долго подгружаются навигация происходит
-                            //по старому айдишнику weatherResponse
-                            //т.е нужно как-то подождать ответа, КАК?
-                            //попаболь с навигацией
-                            viewModel.onSearchClick(query ?: "")
-                            if (it == null) return@observe
-                            navigateToCityInfoFragment(it.id)
-                        }
-
-                    } catch (ex: Exception) {
-                        activity!!.findViewById<View>(android.R.id.content)
-                            .showSnackbar("Город $query не найден")
-                        Log.e("ex", ex.message.toString())
-                    }
-                    return false
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    return false
-                }
-
-            })
+            viewModel.weatherResponse.observe(viewLifecycleOwner) { weatherResponse ->
+                searchDisposable = etCity.observeQuery()
+                    .debounce(500L, TimeUnit.MILLISECONDS)
+                    .distinctUntilChanged()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(onNext = {
+                        viewModel.onSearchClick(it)
+                        if (weatherResponse != null)
+                        //Навигация работает через жепу, нужно как-то проверять на изменение weatherRespons'a
+                            navigateToCityInfoFragment(weatherResponse.id)
+                    },
+                        onError = {
+                            Log.e("Search Error", it.toString())
+                        })
+            }
         }
     }
 
+
+    private fun EditText.observeQuery() =
+        Flowables.create<String>(mode = BackpressureStrategy.LATEST) { emitter ->
+            addTextChangedListener {
+                emitter.onNext(it.toString())
+            }
+        }
+
     override fun onDestroy() {
         super.onDestroy()
+        searchDisposable?.dispose()
         binding = null
     }
 }

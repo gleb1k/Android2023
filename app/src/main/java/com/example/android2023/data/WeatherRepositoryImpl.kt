@@ -4,23 +4,34 @@ import com.example.android2023.data.datasource.remote.WeatherApi
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.domain.WeatherRepository
 import com.example.android2023.presentation.recyclerview.models.CityItem
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlin.math.roundToInt
 
 class WeatherRepositoryImpl(
     private val api: WeatherApi
 ) : WeatherRepository {
-    override suspend fun getWeatherById(id: Int): WeatherResponse = api.getWeatherById(id)
+    override fun getWeatherById(id: Int): Single<WeatherResponse> =
+        api.getWeatherById(id)
+            .subscribeOn(Schedulers.io())
 
-    override suspend fun getWeatherByName(q: String): WeatherResponse = api.getWeatherByName(q)
+    override fun getWeatherByName(q: String): Single<WeatherResponse> =
+        api.getWeatherByName(q)
+            .subscribeOn(Schedulers.io())
 
-    override suspend fun getNearCities(
+    override fun getNearCities(
         latitude: Double,
         longitude: Double,
         count: Int
-    ): List<CityItem> = api.getNearCities(latitude, longitude, count).list.map {
-        CityItem(
-            it.id, it.name, it.main.temp.roundToInt(),
-            "https://openweathermap.org/img/w/${it.weather[0].icon}.png"
-        )
-    }
+    ): Single<List<CityItem>> = api.getNearCities(latitude, longitude, count)
+        .observeOn(Schedulers.computation())
+        .map {
+            it.list.map { wr ->
+                CityItem(
+                    wr.id, wr.name, wr.main.temp.roundToInt(),
+                    "https://openweathermap.org/img/w/${wr.weather[0].icon}.png"
+                )
+            }
+        }
+        .subscribeOn(Schedulers.io())
 }

@@ -42,6 +42,7 @@ data class Coord(
     @SerializedName("lon")
     val lon: Double
 )
+
 data class Main(
     @SerializedName("feels_like")
     val feelsLike: Double,
@@ -60,6 +61,7 @@ data class Main(
     @SerializedName("temp_min")
     val tempMin: Double
 )
+
 data class Sys(
     @SerializedName("country")
     val country: String,
@@ -72,6 +74,7 @@ data class Sys(
     @SerializedName("type")
     val type: Int
 )
+
 data class Weather(
     @SerializedName("description")
     val description: String,

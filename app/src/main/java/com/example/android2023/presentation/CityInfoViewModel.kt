@@ -1,11 +1,16 @@
 package com.example.android2023.presentation
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.android2023.data.datasource.remote.response.WeatherResponse
 import com.example.android2023.domain.usecase.GetWeatherByIdUseCase
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -17,12 +22,15 @@ class CityInfoViewModel(
     val weatherResponse: LiveData<WeatherResponse?>
         get() = _weatherResponse
 
+    var weatherDisposable: Disposable? = null
+
     fun loadWeather(id: Int) {
-        viewModelScope.launch {
-            getWeatherByIdUseCase(id).also {
+        weatherDisposable = getWeatherByIdUseCase(id)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy {
                 _weatherResponse.value = it
             }
-        }
+
     }
 
     fun unixToDate(unix: Int): Date {
@@ -50,6 +58,11 @@ class CityInfoViewModel(
             in 101..169 -> "ЮВ"
             else -> "ex"
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        weatherDisposable?.dispose()
     }
 
     companion object {

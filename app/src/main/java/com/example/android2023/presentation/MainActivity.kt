@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         binding = null

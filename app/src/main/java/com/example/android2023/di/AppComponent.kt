@@ -14,7 +14,6 @@ interface AppComponent {
 
     @Component.Builder
     interface Builder {
-
         @BindsInstance
         fun context(applicationContext: Context): Builder
 
